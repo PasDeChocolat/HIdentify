@@ -1,0 +1,2 @@
+module ContributionAddressesHelper
+end

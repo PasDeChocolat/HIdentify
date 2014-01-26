@@ -1,0 +1,2 @@
+class ContributionAddressesController < ApplicationController
+end

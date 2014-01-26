@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inoutstate: MyString
+  aggregate: MyString
+  range: MyString
+  zip_code: MyString
+  contributor_type: MyString
+  candidate_name: MyString
+  state: MyString
+  date: 2014-01-25
+  party: MyString
+  reg_no: MyString
+  city: MyString
+  amount: 1
+  non_monetary_yes_or_no: MyString
+  district: MyString
+  office: MyString
+  street_address_1: MyString
+  contributor_name: MyString
+  election_period: MyString
+  contribution_address_id: 
+
+two:
+  inoutstate: MyString
+  aggregate: MyString
+  range: MyString
+  zip_code: MyString
+  contributor_type: MyString
+  candidate_name: MyString
+  state: MyString
+  date: 2014-01-25
+  party: MyString
+  reg_no: MyString
+  city: MyString
+  amount: 1
+  non_monetary_yes_or_no: MyString
+  district: MyString
+  office: MyString
+  street_address_1: MyString
+  contributor_name: MyString
+  election_period: MyString
+  contribution_address_id: 
