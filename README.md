@@ -7,6 +7,11 @@ OK, you can just [download a gzipped version](https://github.com/PasDeChocolat/H
 ### Things you need to run this Rails app:
 * Ruby 2.1.0 (I suggest you use [RBEnv](https://github.com/sstephenson/rbenv))
 * Bundle install all the gems
+
+```` bash
+$ bundle install
+````
+
 * All the data is in the "data" directory, you need to ungzip it
 
 ```` bash
@@ -25,14 +30,16 @@ $ rake import:contributions
 
 ### Help Wanted
 
-* We need to associated contributions with aliases and unique persons.
-* We need to webify this (adding users, authentication, logging, undo, etc.)
+* We need to prototype the UI used to associate "aliases" to "persons."
+* We need an algorithm to rank prospective "aliases" as probably matches to "persons."
+* We need volunteers with an interest in the data to associate contributions with aliases and unique persons. This is a research task, requiring people to use alternative forms of verification (name, address, occupation, etc.).
+* We need to webify this application (adding users, authentication, logging, undo, etc.).
 
 # LICENSE
 
 I'm using the [WTFPL](http://www.wtfpl.net "WTF Public License") for now. 
 
-Copyright © 2013 Pas de Chocolat, LLC.
+Copyright © 2014 Pas de Chocolat, LLC.
 This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See the COPYING file for more details.
