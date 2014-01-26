@@ -24,3 +24,9 @@ config/secrets.yml
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+# OS X
+.DS_Store
+
+## Ignore raw data files
+data/contributions.json

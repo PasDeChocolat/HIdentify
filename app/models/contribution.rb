@@ -3,13 +3,28 @@ class Contribution < ActiveRecord::Base
 
   class << self
 
-    def create_with_raw data={}
+    def flatten_raw data={}
       data['date'] = Time.zone.parse data['date']
       data['amount'] = data['amount'].to_i
 
       data.except! 'mapping_address'
+      return data
+    end
 
-      create data
+    def create_with_raw data={}
+      # set this aside, we're mutating data
+      mapping_address = data["mapping_address"]
+
+      # flatten so we can use the hash as the create arg
+      flat = flatten_raw data
+      contrib = create flat
+      if mapping_address
+        contrib.contribution_address = ContributionAddress.find_or_create_with mapping_address
+        unless contrib.save
+          raise "Error! Unable to associate mapping address: #{mapping_address}\n to contribution: #{contrib}"
+        end
+      end
+      return contrib
     end
 
   end

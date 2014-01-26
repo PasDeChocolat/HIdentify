@@ -13,8 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20140126012739) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "contribution_addresses", force: true do |t|
     t.decimal  "longitude",  precision: 15, scale: 10, default: 0.0
+    t.decimal  "latitude",   precision: 15, scale: 10, default: 0.0
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -53,6 +57,6 @@ ActiveRecord::Schema.define(version: 20140126012739) do
     t.datetime "updated_at"
   end
 
-  add_index "contributions", ["contribution_address_id"], name: "index_contributions_on_contribution_address_id"
+  add_index "contributions", ["contribution_address_id"], name: "index_contributions_on_contribution_address_id", using: :btree
 
 end
