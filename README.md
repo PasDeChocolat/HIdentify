@@ -2,7 +2,7 @@
 
 ### I'm just here for the JSON data.
 
-OK, you can just [download a gzipped version](https://github.com/PasDeChocolat/HIdentity/raw/master/data/contributions.json.gz). This is taken directly from the Data.Hawaii.gov's [Campaign Contributions Received By Hawaii State and County Candidates From November 8, 2006 Through December 31, 2013](https://data.hawaii.gov/Community/Campaign-Contributions-Received-By-Hawaii-State-an/jexd-xbcg) dataset.
+OK, you can just [download a gzipped version](https://github.com/PasDeChocolat/HIdentity/raw/master/data/contributions.json.gz). This is taken directly from the Data.Hawaii.gov's [Campaign Contributions Received By Hawaii State and County Candidates From November 8, 2006 Through December 31, 2013](https://data.hawaii.gov/Community/Campaign-Contributions-Received-By-Hawaii-State-an/jexd-xbcg) dataset. It's about 4.7M with just under 82,000 records.
 
 ### Things you need to run this Rails app:
 * Ruby 2.1.0 (I suggest you use [RBEnv](https://github.com/sstephenson/rbenv))
