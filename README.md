@@ -1,7 +1,10 @@
 # HIdentify - A Hawai‘i community tech project.
 
+### I'm just here for the JSON data.
 
-### Things you need:
+OK, you can just [download a gzipped version](https://github.com/PasDeChocolat/HIdentity/raw/master/data/contributions.json.gz).
+
+### Things you need to run this Rails app:
 * Ruby 2.1.0 (I suggest you use [RBEnv](https://github.com/sstephenson/rbenv))
 * Bundle install all the gems
 * All the data is in the "data" directory, you need to ungzip it
@@ -19,7 +22,8 @@ $ rake db:migrate
 $ rake import:contributions
 ````
 
-# Help Wanted
+
+### Help Wanted
 
 * We need to associated contributions with aliases and unique persons.
 * We need to webify this (adding users, authentication, logging, undo, etc.)
