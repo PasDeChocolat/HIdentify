@@ -12,6 +12,11 @@ namespace :io do
     p hash_contributions(DATA_FILE).first
   end
 
+  desc "Show all top-level keys in contribution file."
+  task :contributions_keys do
+    p contribution_keys(DATA_FILE).to_a.sort
+  end
+
 end
 
 namespace :import do
