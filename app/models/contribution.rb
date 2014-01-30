@@ -6,6 +6,7 @@ class Contribution < ActiveRecord::Base
     def flatten_raw data={}
       data['date'] = Time.zone.parse data['date']
       data['amount'] = data['amount'].to_i
+      data['aggregate'] = data['aggregate'].to_i
 
       data.except! 'mapping_address'
       return data

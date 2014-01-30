@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140126012739) do
 
   create_table "contributions", force: true do |t|
     t.string   "inoutstate"
-    t.string   "aggregate"
+    t.integer  "aggregate"
     t.string   "range"
     t.string   "zip_code"
     t.string   "contributor_type"

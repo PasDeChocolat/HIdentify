@@ -2,7 +2,7 @@ class CreateContributions < ActiveRecord::Migration
   def change
     create_table :contributions do |t|
       t.string :inoutstate
-      t.string :aggregate
+      t.integer :aggregate
       t.string :range
       t.string :zip_code
       t.string :contributor_type
