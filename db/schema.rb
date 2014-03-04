@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126012739) do
+ActiveRecord::Schema.define(version: 20140304054728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,5 +58,32 @@ ActiveRecord::Schema.define(version: 20140126012739) do
   end
 
   add_index "contributions", ["contribution_address_id"], name: "index_contributions_on_contribution_address_id", using: :btree
+
+  create_table "groupings", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "matches", force: true do |t|
+    t.string   "search_token"
+    t.integer  "grouping_id"
+    t.integer  "contribution_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "matches", ["contribution_id"], name: "index_matches_on_contribution_id", using: :btree
+  add_index "matches", ["grouping_id"], name: "index_matches_on_grouping_id", using: :btree
+
+  create_table "votes", force: true do |t|
+    t.string   "is_match"
+    t.text     "comment"
+    t.integer  "match_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["match_id"], name: "index_votes_on_match_id", using: :btree
 
 end
