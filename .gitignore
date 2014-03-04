@@ -29,4 +29,4 @@ config/secrets.yml
 .DS_Store
 
 ## Ignore raw data files
-/data/contributions.json
+/data/*.json
