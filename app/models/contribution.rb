@@ -1,5 +1,7 @@
 class Contribution < ActiveRecord::Base
   belongs_to :contribution_address
+  has_many :matches
+  has_many :groupings, through: :matches
 
   class << self
 
