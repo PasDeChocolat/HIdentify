@@ -41,11 +41,11 @@ A project doesn't warrant your attention until the person(s) proposing it has, a
 
 Here are our sketches...
 
-#### Hack Day 1
+#### Hack Night 1
 From January 26, 2014
 ![Project Goals](https://raw.github.com/PasDeChocolat/HIdentify/master/work/whiteboard_hack_day_1.png)
 
-#### Hack Day 2
+#### Hack Night 2
 From February 12, 2014
 ![Bespoke User Interface (for Doug)](https://raw.github.com/PasDeChocolat/HIdentify/master/work/whiteboard_hack_day_2.jpg)
 
