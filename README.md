@@ -35,6 +35,20 @@ $ rake import:contributions
 * We need volunteers with an interest in the data to associate contributions with aliases and unique persons. This is a research task, requiring people to use alternative forms of verification (name, address, occupation, etc.).
 * We need to webify this application (adding users, authentication, logging, undo, etc.).
 
+### Work in Progress
+
+A project doesn't warrant your attention until the person(s) proposing it has, at least, started sketching it out.
+
+Here are our sketches...
+
+#### Hack Day 1
+![Project Goals](https://raw.github.com/PasDeChocolat/HIdentify/master/work/whiteboard_hack_day_1.jpg)
+From January 26, 2014
+
+#### Hack Day 2
+![Bespoke User Interface (for Doug)](https://raw.github.com/PasDeChocolat/HIdentify/master/work/whiteboard_hack_day_2.jpg)
+From February 12, 2014
+
 # LICENSE
 
 HIdentify - An app for linking contributions to actual, IRL humans.
