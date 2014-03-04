@@ -42,7 +42,7 @@ A project doesn't warrant your attention until the person(s) proposing it has, a
 Here are our sketches...
 
 #### Hack Day 1
-![Project Goals](https://raw.github.com/PasDeChocolat/HIdentify/master/work/whiteboard_hack_day_1.jpg)
+![Project Goals](https://raw.github.com/PasDeChocolat/HIdentify/master/work/whiteboard_hack_day_1.png)
 From January 26, 2014
 
 #### Hack Day 2
