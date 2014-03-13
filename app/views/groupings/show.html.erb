@@ -1,4 +1,4 @@
-<div id="grouping">
+<div id="grouping" data-grouping-id="<%= @grouping.id %>">
   <p id="notice"><%= notice %></p>
   <h1 class="page-header"><%= @grouping.name %></h1>
   <div class="row">
@@ -16,6 +16,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th>Match?</th>
           <th>Candidate</th>
           <th>Office</th>
           <th>Contributor</th>
