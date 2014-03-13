@@ -6,6 +6,9 @@ root = global ? window
 loadGroupingPage = ->
   return unless $('#grouping').exists()
 
+  clearSearchResults = ->
+    $("#search-result-body").empty()
+
   addSearchResult = (searchResult) ->
     console.log searchResult
     candidateName   = searchResult['candidate_name']
@@ -19,6 +22,7 @@ loadGroupingPage = ->
       dataType: "json",
       type: "GET",
       success: (data, textStatus, jqXHR) ->
+        clearSearchResults()
         _.forEach(data, addSearchResult)
       ,
       error: (jqXHR, status, error) ->
