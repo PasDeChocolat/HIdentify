@@ -1,4 +1,5 @@
 HIdentify::Application.routes.draw do
+  get "contribution_search/:search_token" => 'contribution_search#index', as: :contribution_search
   resources :groupings
 
   resources :contributions

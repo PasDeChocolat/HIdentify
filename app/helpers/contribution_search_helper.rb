@@ -1,0 +1,2 @@
+module ContributionSearchHelper
+end
