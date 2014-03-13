@@ -1,9 +1,25 @@
 <p id="notice"><%= notice %></p>
+<h1 class="page-header"><%= @grouping.name %></h1>
+<div class="row">
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @grouping.name %>
-</p>
+<h2 class="sub-header">Matches</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Search Token</th>
+        <th>Header</th>
+        <th>Header</th>
+        <th>Header</th>
+        <th>Header</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "match", collection: @matches, as: :match %>
+    </tbody>
+  </table>
+</div>
 
 <%= link_to 'Edit', edit_grouping_path(@grouping) %> |
 <%= link_to 'Back', groupings_path %>
