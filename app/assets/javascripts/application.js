@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
+//= require lodash.min
 //= require turbolinks
 //= require_tree .
+
+jQuery.fn.exists = function(){return this.length>0;}

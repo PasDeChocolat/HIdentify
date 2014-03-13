@@ -1,4 +1,6 @@
 HIdentify::Application.routes.draw do
+  resources :groupings
+
   resources :contributions
 
   resources :contribution_addresses
