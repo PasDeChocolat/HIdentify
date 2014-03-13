@@ -32,6 +32,15 @@ class Contribution < ActiveRecord::Base
 
   end
 
+  def formatted_full_address
+    addr = ""
+    addr += street_address_1 unless street_address_1.blank?
+    addr += ", #{street_address_2}" unless street_address_2.blank?
+    addr += ", #{city}" unless city.blank?
+    addr += ", #{state}" unless state.blank?
+    addr += ", #{zip_code}" unless zip_code.blank?
+    addr
+  end
 
   # "inoutstate" : "HI ",
   # "aggregate" : "200",

@@ -1,7 +1,7 @@
 <tr>
   <td><%= match.search_token %></td>
-  <td>Lorem</td>
-  <td>ipsum</td>
-  <td>dolor</td>
-  <td>sit</td>
+  <td><%= match.contribution.candidate_name %></td>
+  <td><%= match.contribution.office %></td>
+  <td><%= "(ID #{match.contribution.id}) #{match.contribution.contributor_name}" %></td>
+  <td><%= match.contribution.formatted_full_address %></td>
 </tr>
