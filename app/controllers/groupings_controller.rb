@@ -10,6 +10,7 @@ class GroupingsController < ApplicationController
   # GET /groupings/1
   # GET /groupings/1.json
   def show
+    @matches = @grouping.matches
   end
 
   # GET /groupings/new
