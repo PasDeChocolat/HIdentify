@@ -60,15 +60,19 @@ loadGroupingPage = ->
       office           = searchResult['office']
       contributorName = searchResult['contributor_name']
       contributionId = searchResult['id']
-      $("#search-result-body").append("<tr><td><input class='search-result-match' type='checkbox' data-contrib-id='"+contributionId+"' data-search-token='"+searchToken+"'>"+
-                                      "</td><td>"+candidateName+
-                                      "</td><td>"+office+
-                                      "</td><td>"+contributorName+
-                                      "</td></tr>");
+      matched = searchResult['is_matched']
+      row = "<tr><td><input class='search-result-match' type='checkbox' data-contrib-id='"+contributionId+"' data-search-token='"+searchToken+"'"
+      row += " CHECKED" if matched
+      row += ">"+
+             "</td><td>"+candidateName+
+             "</td><td>"+office+
+             "</td><td>"+contributorName+
+             "</td></tr>"
+      $("#search-result-body").append(row)
 
-  searchForToken = (searchToken) ->
+  searchForToken = (groupingId, searchToken) ->
     $.ajax(
-      url: "/contribution_search/"+searchToken+".json",
+      url: "/contribution_search/"+groupingId+"/"+searchToken+".json",
       dataType: "json",
       type: "GET",
       success: (data, textStatus, jqXHR) ->
@@ -84,7 +88,8 @@ loadGroupingPage = ->
     e.preventDefault()
     searchToken = $("#contrib-search-text").val()
     return if _.isEmpty searchToken
-    searchForToken searchToken
+    groupingId = $('#grouping').data('grouping-id')
+    searchForToken groupingId, searchToken
 
   $("#contrib-search-button").click contribSearchClicked
 

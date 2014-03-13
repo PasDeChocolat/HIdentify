@@ -1,7 +1,17 @@
 class ContributionSearchController < ApplicationController
   def index
+    grouping = Grouping.find(params[:grouping_id])
+
     search_token = params[:search_token]
+
+
+
     results = Contribution.where("contributor_name ilike ?", "%#{search_token}%")
+    results = results.map do |c|
+      h = c.attributes
+      h['is_matched'] = grouping.contributions.include?(c)
+      h
+    end
 
     respond_to do |format|
       format.json { render json: results }
@@ -41,7 +51,7 @@ class ContributionSearchController < ApplicationController
     contribution = Contribution.find(match_params[:contribution_id])
 
     search_token = match_params[:search_token]
-    matches = grouping.matches.where(search_token: search_token)
+    matches = grouping.matches.where(search_token: search_token, contribution_id: contribution.id)
 
     respond_to do |format|
       if matches.empty?
