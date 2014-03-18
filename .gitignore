@@ -30,3 +30,4 @@ config/secrets.yml
 
 ## Ignore raw data files
 /data/*.json
+hidentify.dump

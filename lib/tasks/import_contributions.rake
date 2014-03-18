@@ -47,4 +47,9 @@ namespace :export do
     extract_json_for DATA_FILE, export_file_name_for(year), year
   end
 
+  desc "Dump DB to PostgreSQL dump file."
+  task :dump do
+    sh "pg_dump -Fc --no-acl --no-owner -h localhost hidentify_development > hidentify.dump"
+  end
+
 end
