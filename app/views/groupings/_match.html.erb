@@ -1,4 +1,9 @@
-<tr>
+<tr data-match-id='<%= match.id %>'>
+  <td>
+    <button type="button" class="btn btn-default btn-xs remove-saved-match">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </td>
   <td><%= match.search_token %></td>
   <td><%= match.contribution.candidate_name %></td>
   <td><%= match.contribution.office %></td>

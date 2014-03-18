@@ -3,6 +3,7 @@ HIdentify::Application.routes.draw do
   put "contribution/:contribution_id/grouping/:grouping_id/search_token/:search_token" => 'contribution_search#match_add', as: :match_add
   delete "contribution/:contribution_id/grouping/:grouping_id/search_token/:search_token" => 'contribution_search#match_delete', as: :match_delete
 
+  resources :matches, only: [:destroy]
   resources :groupings
 
   resources :contributions

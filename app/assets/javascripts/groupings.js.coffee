@@ -9,8 +9,6 @@ loadGroupingPage = ->
   # put "contribution/:contribution_id/search_token/:search_token" => 'contribution_search#match_add', as: :match_add
   # delete "contribution/:contribution_id/search_token/:search_token" => 'contribution_search#match_delete', as: :match_delete
   addMatch = (groupingId, contribId, searchToken) ->
-    console.log 'ADD contribId: ' + contribId
-    console.log 'searchToken: ' + searchToken
     $.ajax(
       url: "/contribution/"+contribId+"/grouping/"+groupingId+"/search_token/"+searchToken+".json",
       dataType: "json",
@@ -23,8 +21,6 @@ loadGroupingPage = ->
       )
 
   removeMatch = (groupingId, contribId, searchToken) ->
-    console.log 'REM contribId: ' + contribId
-    console.log 'searchToken: ' + searchToken
     $.ajax(
       url: "/contribution/"+contribId+"/grouping/"+groupingId+"/search_token/"+searchToken+".json",
       dataType: "json",
@@ -36,18 +32,29 @@ loadGroupingPage = ->
         console.log "Failed to load data for search token: "+searchToken+ " contrib ID: "+contribId
       )
 
+  removeSavedMatchRow = (row) ->
+    matchId = row.data('match-id')
+    $.ajax(
+      url: "/matches/"+matchId+".json",
+      dataType: "json",
+      type: "DELETE",
+      success: (data, textStatus, jqXHR) ->
+        console.log 'remove saved match complete'
+        row.remove()
+      ,
+      error: (jqXHR, status, error) ->
+        console.log "Failed to destroy saved match: "+matchId
+      )
+
   searchResultMatchChecked = (e) ->
     isChecked = e.currentTarget.checked
     contributionId = $(e.currentTarget).data('contrib-id')
     searchToken = $(e.currentTarget).data('search-token')
     groupingId = $('#grouping').data('grouping-id')
     if isChecked
-      console.log 'check: ' + contributionId
       addMatch(groupingId, contributionId, searchToken)
     else
-      console.log 'uncheck: ' + + contributionId
       removeMatch(groupingId, contributionId, searchToken)
-    console.log e
 
 
   clearSearchResults = ->
@@ -55,7 +62,6 @@ loadGroupingPage = ->
 
   genSearchResultFn = (searchToken) ->
     (searchResult) ->
-      console.log searchResult
       candidateName   = searchResult['candidate_name']
       office           = searchResult['office']
       contributorName = searchResult['contributor_name']
@@ -92,6 +98,9 @@ loadGroupingPage = ->
     searchForToken groupingId, searchToken
 
   $("#contrib-search-button").click contribSearchClicked
+  $("#saved-matches button.remove-saved-match").click (e) ->
+    row = $(this).closest('tr')
+    removeSavedMatchRow(row)
 
 $(loadGroupingPage)
 $(document).on('page:load', loadGroupingPage) # for turbolinks
