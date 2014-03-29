@@ -47,6 +47,7 @@ loadGroupingPage = ->
       )
 
   searchResultMatchChecked = (e) ->
+    e.preventDefault()
     isChecked = e.currentTarget.checked
     contributionId = $(e.currentTarget).data('contrib-id')
     searchToken = $(e.currentTarget).data('search-token')
@@ -62,7 +63,6 @@ loadGroupingPage = ->
 
   genSearchResultFn = (searchToken) ->
     (searchResult) ->
-      console.log searchResult
       candidateName   = searchResult['candidate_name']
       office           = searchResult['office']
       contributorName = searchResult['contributor_name']
@@ -104,6 +104,7 @@ loadGroupingPage = ->
 
   $("#contrib-search-button").click contribSearchClicked
   $("#saved-matches button.remove-saved-match").click (e) ->
+    e.preventDefault()
     row = $(this).closest('tr')
     removeSavedMatchRow(row)
 
