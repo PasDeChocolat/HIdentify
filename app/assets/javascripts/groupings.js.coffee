@@ -68,6 +68,8 @@ loadGroupingPage = ->
       contributorName = searchResult['contributor_name']
       contributorAddr = searchResult['formatted_full_address']
       electionPeriod = searchResult['election_period']
+      contribAmount = searchResult['amount']
+      contribAgg = searchResult['aggregate']
       contributionId = searchResult['id']
       matched = searchResult['is_matched']
       row = "<tr><td><input class='search-result-match' type='checkbox' data-contrib-id='"+contributionId+"' data-search-token='"+searchToken+"'"
@@ -77,6 +79,7 @@ loadGroupingPage = ->
              "</td><td>"+office+
              "</td><td>"+contributorName+
              "</td><td>"+contributorAddr+
+             "</td><td>"+contribAmount+' (Agg: '+contribAgg+')'
              "</td><td>"+electionPeriod+
              "</td></tr>"
       $("#search-result-body").append(row)
