@@ -62,9 +62,11 @@ loadGroupingPage = ->
 
   genSearchResultFn = (searchToken) ->
     (searchResult) ->
+      console.log searchResult
       candidateName   = searchResult['candidate_name']
       office           = searchResult['office']
       contributorName = searchResult['contributor_name']
+      electionPeriod = searchResult['election_period']
       contributionId = searchResult['id']
       matched = searchResult['is_matched']
       row = "<tr><td><input class='search-result-match' type='checkbox' data-contrib-id='"+contributionId+"' data-search-token='"+searchToken+"'"
@@ -73,6 +75,7 @@ loadGroupingPage = ->
              "</td><td>"+candidateName+
              "</td><td>"+office+
              "</td><td>"+contributorName+
+             "</td><td>"+electionPeriod+
              "</td></tr>"
       $("#search-result-body").append(row)
 
