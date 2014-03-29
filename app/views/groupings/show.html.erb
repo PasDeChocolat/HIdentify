@@ -4,8 +4,25 @@
   <div class="row">
     <div class="col-md-12">
       <h4 class="form-search-heading">Contribution Search</h4>
-      <form class="form-search" role="form">
-        <input id="contrib-search-text" type="text" class="form-control" placeholder="Start Typin'..." required autofocus>
+      <form id="grouping-contrib-search" class="form-search form-horizontal" role="form">
+        <div class="form-group">
+          <div class="col-sm-4">
+            <select class="form-control">
+              <option>Candidate Name</option>
+              <option>Candidate Office</option>
+              <option>Contributor Name</option>
+              <option>Contributor Address</option>
+              <option>Election Period</option>
+            </select>
+          </div>
+          <div class="col-sm-5">
+            <input id="contrib-search-text" type="text" class="form-control" placeholder="Enter search token" required autofocus>
+          </div>
+          <div class="col-sm-3">
+            <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span></button>
+            <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+          </div>
+        </div>
         <button id="contrib-search-button" class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
       </form>
     </div>
