@@ -66,6 +66,7 @@ loadGroupingPage = ->
       candidateName   = searchResult['candidate_name']
       office           = searchResult['office']
       contributorName = searchResult['contributor_name']
+      contributorAddr = searchResult['formatted_full_address']
       electionPeriod = searchResult['election_period']
       contributionId = searchResult['id']
       matched = searchResult['is_matched']
@@ -75,6 +76,7 @@ loadGroupingPage = ->
              "</td><td>"+candidateName+
              "</td><td>"+office+
              "</td><td>"+contributorName+
+             "</td><td>"+contributorAddr+
              "</td><td>"+electionPeriod+
              "</td></tr>"
       $("#search-result-body").append(row)

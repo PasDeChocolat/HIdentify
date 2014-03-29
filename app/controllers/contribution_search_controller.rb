@@ -10,6 +10,7 @@ class ContributionSearchController < ApplicationController
     results = results.map do |c|
       h = c.attributes
       h['is_matched'] = grouping.contributions.include?(c)
+      h['formatted_full_address'] = c.formatted_full_address
       h
     end
 
