@@ -10,9 +10,10 @@ loadGroupingPage = ->
   # delete "contribution/:contribution_id/search_token/:search_token" => 'contribution_search#match_delete', as: :match_delete
   addMatch = (groupingId, contribId, searchToken) ->
     $.ajax(
-      url: "/contribution/"+contribId+"/grouping/"+groupingId+"/search_token/"+searchToken+".json",
+      url: "/contribution/"+contribId+"/grouping/"+groupingId+".json",
       dataType: "json",
       type: "PUT",
+      data: {'criteria': JSON.stringify(searchToken)},
       success: (data, textStatus, jqXHR) ->
         console.log 'add match complete'
       ,

@@ -1,6 +1,5 @@
 class ContributionSearchController < ApplicationController
   def criteria_search
-    puts ""
     grouping = Grouping.find(params[:grouping_id])
     criteria = params[:criteria]
     criteria_ast = JSON.parse(criteria)
@@ -24,7 +23,6 @@ class ContributionSearchController < ApplicationController
 
     respond_to do |format|
       format.json { render json: results }
-      # format.json { render text: "hello" }
     end
   end
 
@@ -34,13 +32,12 @@ class ContributionSearchController < ApplicationController
 
     grouping = Grouping.find(match_params[:grouping_id])
     contribution = Contribution.find(match_params[:contribution_id])
-
-    search_token = match_params[:search_token]
-    matches = grouping.matches.where(search_token: search_token, contribution_id: contribution.id)
+    criteria = params[:criteria]
+    matches = grouping.matches.where(search_token: criteria, contribution_id: contribution.id)
 
     match = nil
     if matches.empty?
-      match = grouping.matches.create(search_token: search_token)
+      match = grouping.matches.create(search_token: criteria)
       match.contribution = contribution
     end
 
