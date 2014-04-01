@@ -7,7 +7,6 @@ loadGroupingPage = ->
   return unless $('#grouping').exists()
 
   # put "contribution/:contribution_id/search_token/:search_token" => 'contribution_search#match_add', as: :match_add
-  # delete "contribution/:contribution_id/search_token/:search_token" => 'contribution_search#match_delete', as: :match_delete
   addMatch = (groupingId, contribId, searchToken) ->
     $.ajax(
       url: "/contribution/"+contribId+"/grouping/"+groupingId+".json",
@@ -16,18 +15,6 @@ loadGroupingPage = ->
       data: {'criteria': JSON.stringify(searchToken)},
       success: (data, textStatus, jqXHR) ->
         console.log 'add match complete'
-      ,
-      error: (jqXHR, status, error) ->
-        console.log "Failed to load data for search token: "+searchToken+ " contrib ID: "+contribId
-      )
-
-  removeMatch = (groupingId, contribId, searchToken) ->
-    $.ajax(
-      url: "/contribution/"+contribId+"/grouping/"+groupingId+"/search_token/"+searchToken+".json",
-      dataType: "json",
-      type: "DELETE",
-      success: (data, textStatus, jqXHR) ->
-        console.log 'remove match complete'
       ,
       error: (jqXHR, status, error) ->
         console.log "Failed to load data for search token: "+searchToken+ " contrib ID: "+contribId
@@ -49,14 +36,16 @@ loadGroupingPage = ->
 
   searchResultMatchChecked = (e) ->
     e.preventDefault()
-    isChecked = e.currentTarget.checked
-    contributionId = $(e.currentTarget).data('contrib-id')
-    searchToken = $(e.currentTarget).data('search-token')
+    checkBox = $(e.currentTarget)
+    isChecked = checkBox.is(':checked')
+    contributionId = checkBox.data('contrib-id')
+    searchToken = checkBox.data('search-token')
     groupingId = $('#grouping').data('grouping-id')
     if isChecked
       addMatch(groupingId, contributionId, searchToken)
     else
-      removeMatch(groupingId, contributionId, searchToken)
+      row = checkBox.closest('tr')
+      removeSavedMatchRow(row)
 
 
   clearSearchResults = ->
@@ -73,7 +62,11 @@ loadGroupingPage = ->
       contribAgg = searchResult['aggregate']
       contributionId = searchResult['id']
       matched = searchResult['is_matched']
-      row = "<tr><td><input class='search-result-match' type='checkbox' data-contrib-id='"+contributionId+"' data-search-token='"+searchToken+"'"
+      matchId = searchResult['match_id']
+      row = "<tr"
+      if matchId?
+        row += " data-match-id='"+(matchId)+"'"
+      row += "><td><input class='search-result-match' type='checkbox' data-contrib-id='"+contributionId+"' data-search-token='"+searchToken+"'"
       row += " CHECKED" if matched
       row += ">"+
              "</td><td>"+candidateName+

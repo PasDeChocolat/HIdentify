@@ -16,7 +16,14 @@ class ContributionSearchController < ApplicationController
 
     results = results.map do |c|
       h = c.attributes
-      h['is_matched'] = grouping.contributions.include?(c)
+
+      matches = c.matches.where(grouping: grouping)
+
+      # isMatched = grouping.contributions.include?(c)
+      isMatched = !matches.blank?
+      h['is_matched'] = isMatched
+      h['match_id'] = matches.first.id if isMatched
+
       h['formatted_full_address'] = c.formatted_full_address
       h
     end
@@ -46,33 +53,6 @@ class ContributionSearchController < ApplicationController
         format.json { head :no_content }
       else
         format.json { render json: ["error"], status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def match_delete
-    puts "DELETE match_params:"
-    puts match_params
-
-    grouping = Grouping.find(match_params[:grouping_id])
-    contribution = Contribution.find(match_params[:contribution_id])
-
-    search_token = match_params[:search_token]
-    matches = grouping.matches.where(search_token: search_token, contribution_id: contribution.id)
-
-    respond_to do |format|
-      if matches.empty?
-        # match = grouping.matches.create(search_token: search_token)
-        # match.contribution = contribution
-        format.json { head :no_content }
-        return
-      else
-        grouping.matches.delete matches.first
-        if grouping.save
-          format.json { head :no_content }
-        else
-          format.json { render json: ["error"], status: :unprocessable_entity }
-        end
       end
     end
   end
