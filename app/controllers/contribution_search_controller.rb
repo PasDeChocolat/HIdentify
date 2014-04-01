@@ -1,12 +1,20 @@
 class ContributionSearchController < ApplicationController
-  def index
+  def criteria_search
+    puts ""
     grouping = Grouping.find(params[:grouping_id])
+    criteria = params[:criteria]
+    criteria_ast = JSON.parse(criteria)
 
-    search_token = params[:search_token]
+    # For now, this works (assume all 'ands')
+    and_criteria = criteria_ast.drop(1)
 
+    results = Contribution
+    and_criteria.each do |crit|
+      search_type = crit['type']
+      search_val = crit['v']
+      results = results.where("#{search_type} ilike ?", "%#{search_val}%")
+    end
 
-
-    results = Contribution.where("contributor_name ilike ?", "%#{search_token}%")
     results = results.map do |c|
       h = c.attributes
       h['is_matched'] = grouping.contributions.include?(c)
@@ -16,6 +24,7 @@ class ContributionSearchController < ApplicationController
 
     respond_to do |format|
       format.json { render json: results }
+      # format.json { render text: "hello" }
     end
   end
 
@@ -75,6 +84,6 @@ class ContributionSearchController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params.permit(:contribution_id, :search_token, :grouping_id)
+      params.permit(:contribution_id, :search_token, :grouping_id, :criteria)
     end
 end

@@ -84,32 +84,50 @@ loadGroupingPage = ->
              "</td></tr>"
       $("#search-result-body").append(row)
 
-  searchForToken = (groupingId, searchToken) ->
+  searchWithCriteria = (groupingId, criteria) ->
     $.ajax(
-      url: "/contribution_search/"+groupingId+"/"+searchToken+".json",
+      url: "/contribution_search/"+groupingId+".json",
       dataType: "json",
-      type: "GET",
+      type: "POST",
+      data: {'criteria': JSON.stringify(criteria)},
       success: (data, textStatus, jqXHR) ->
         clearSearchResults()
-        _.forEach(data, genSearchResultFn(searchToken))
+        _.forEach(data, genSearchResultFn(JSON.stringify(criteria)))
         $('#grouping input.search-result-match').change(searchResultMatchChecked)
       ,
       error: (jqXHR, status, error) ->
-        console.log "Failed to load data for search token: "+searchToken
+        console.log "Failed to load data for search criteria: "+JSON.stringify(criteria)
       )
+
+  genSearchCriteria = (searchType, searchToken) ->
+    {type: searchType, v: searchToken}
 
   contribSearchClicked = (e) ->
     e.preventDefault()
-    searchToken = $("#contrib-search-text").val()
-    return if _.isEmpty searchToken
+    searchCriteria = $(this).closest('#grouping-contrib-search').find('div.form-group')
+    allCriteria = []
+    _.each searchCriteria, (s) ->
+      searchType = $(s).find('.contrib-search-type').val()
+      searchToken = $(s).find('.contrib-search-text').val()
+      return if _.isEmpty(searchToken)
+
+      allCriteria.push('and') if _.isEmpty(allCriteria)
+      allCriteria.push genSearchCriteria(searchType, searchToken)
+
+    return if _.isEmpty allCriteria
     groupingId = $('#grouping').data('grouping-id')
-    searchForToken groupingId, searchToken
+    searchWithCriteria groupingId, allCriteria
 
   $("#contrib-search-button").click contribSearchClicked
   $("#saved-matches button.remove-saved-match").click (e) ->
     e.preventDefault()
     row = $(this).closest('tr')
     removeSavedMatchRow(row)
+
+  $(document).on 'click', ".search-attr-plus",  ->
+    currRow = $(this).closest('div.form-group')
+    currRow.clone().insertAfter(currRow)
+
 
 $(loadGroupingPage)
 $(document).on('page:load', loadGroupingPage) # for turbolinks

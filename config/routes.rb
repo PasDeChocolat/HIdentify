@@ -1,5 +1,5 @@
 HIdentify::Application.routes.draw do
-  get "contribution_search/:grouping_id/:search_token" => 'contribution_search#index', as: :contribution_search
+  post "contribution_search/:grouping_id" => 'contribution_search#criteria_search', as: :contribution_criteria_search
   put "contribution/:contribution_id/grouping/:grouping_id/search_token/:search_token" => 'contribution_search#match_add', as: :match_add
   delete "contribution/:contribution_id/grouping/:grouping_id/search_token/:search_token" => 'contribution_search#match_delete', as: :match_delete
 

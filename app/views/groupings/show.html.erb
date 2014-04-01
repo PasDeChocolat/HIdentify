@@ -7,20 +7,20 @@
       <form id="grouping-contrib-search" class="form-search form-horizontal" role="form">
         <div class="form-group">
           <div class="col-sm-4">
-            <select class="form-control">
-              <option>Candidate Name</option>
-              <option>Candidate Office</option>
-              <option>Contributor Name</option>
-              <option>Contributor Address</option>
-              <option>Election Period</option>
+            <select class="form-control contrib-search-type">
+              <option value="candidate_name">Candidate Name</option>
+              <option value="office">Candidate Office</option>
+              <option value="contributor_name">Contributor Name</option>
+              <option value="contributor_address">Contributor Address</option>
+              <option value="election_period">Election Period</option>
             </select>
           </div>
           <div class="col-sm-5">
-            <input id="contrib-search-text" type="text" class="form-control" placeholder="Enter search token" required autofocus>
+            <input type="text" class="form-control contrib-search-text" placeholder="Enter search token" required autofocus>
           </div>
           <div class="col-sm-3">
-            <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span></button>
-            <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+            <button type="button" class="btn btn-default search-attr-minus"><span class="glyphicon glyphicon-minus"></span></button>
+            <button type="button" class="btn btn-default search-attr-plus"><span class="glyphicon glyphicon-plus"></span></button>
           </div>
         </div>
         <button id="contrib-search-button" class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
