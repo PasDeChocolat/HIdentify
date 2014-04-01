@@ -7,7 +7,7 @@ loadGroupingPage = ->
   return unless $('#grouping').exists()
 
   # put "contribution/:contribution_id/search_token/:search_token" => 'contribution_search#match_add', as: :match_add
-  addMatch = (groupingId, contribId, searchToken) ->
+  addMatch = (row, groupingId, contribId, searchToken) ->
     $.ajax(
       url: "/contribution/"+contribId+"/grouping/"+groupingId+".json",
       dataType: "json",
@@ -15,12 +15,13 @@ loadGroupingPage = ->
       data: {'criteria': JSON.stringify(searchToken)},
       success: (data, textStatus, jqXHR) ->
         console.log 'add match complete'
+        row.data('match-id', data.id)
       ,
       error: (jqXHR, status, error) ->
         console.log "Failed to load data for search token: "+searchToken+ " contrib ID: "+contribId
       )
 
-  removeSavedMatchRow = (row) ->
+  removeSavedMatchRow = (row, removeRow = true) ->
     matchId = row.data('match-id')
     $.ajax(
       url: "/matches/"+matchId+".json",
@@ -28,7 +29,7 @@ loadGroupingPage = ->
       type: "DELETE",
       success: (data, textStatus, jqXHR) ->
         console.log 'remove saved match complete'
-        row.remove()
+        row.remove() if removeRow
       ,
       error: (jqXHR, status, error) ->
         console.log "Failed to destroy saved match: "+matchId
@@ -41,11 +42,11 @@ loadGroupingPage = ->
     contributionId = checkBox.data('contrib-id')
     searchToken = checkBox.data('search-token')
     groupingId = $('#grouping').data('grouping-id')
+    row = checkBox.closest('tr')
     if isChecked
-      addMatch(groupingId, contributionId, searchToken)
+      addMatch(row, groupingId, contributionId, searchToken)
     else
-      row = checkBox.closest('tr')
-      removeSavedMatchRow(row)
+      removeSavedMatchRow(row, false)
 
 
   clearSearchResults = ->

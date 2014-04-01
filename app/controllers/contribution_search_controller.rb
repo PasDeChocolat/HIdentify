@@ -34,23 +34,23 @@ class ContributionSearchController < ApplicationController
   end
 
   def match_add
-    puts "PUT match_params:"
-    puts match_params
-
     grouping = Grouping.find(match_params[:grouping_id])
     contribution = Contribution.find(match_params[:contribution_id])
     criteria = params[:criteria]
     matches = grouping.matches.where(search_token: criteria, contribution_id: contribution.id)
-
-    match = nil
-    if matches.empty?
-      match = grouping.matches.create(search_token: criteria)
-      match.contribution = contribution
+    unless matches.empty?
+      respond_to do |format|
+        format.json { head :no_content }
+        return
+      end
     end
 
+    match = grouping.matches.create(search_token: criteria)
+    match.contribution = contribution
+
     respond_to do |format|
-      if match.nil? || match.save
-        format.json { head :no_content }
+      if match.save
+        format.json { render json: match }
       else
         format.json { render json: ["error"], status: :unprocessable_entity }
       end
