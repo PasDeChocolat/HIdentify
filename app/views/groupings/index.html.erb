@@ -1,4 +1,4 @@
-<h1>Listing groupings</h1>
+<h1>Doug's Groupings (Seriously)</h1>
 
 <table>
   <thead>
@@ -12,7 +12,7 @@
 
   <tbody>
     <% @groupings.each do |grouping| %>
-      <tr>
+      <tr class="grouping-row">
         <td><%= grouping.name %></td>
         <td><%= link_to 'Show', grouping %></td>
         <td><%= link_to 'Edit', edit_grouping_path(grouping) %></td>
